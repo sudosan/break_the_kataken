@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <img id="pic" src="img1.png">
+    <audio id="tataku" src="punch.mp3"></audio>
+    <audio id="bakuha" src="bomb.mp3"></audio>
+    <style>
+        * {
+            margin: 0;
+        }
+
+        #pic {
+            width: 100%;
+            min-height: 70vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+    </style>
+    <script>
+        const picture = document.getElementById("pic");
+        picture.addEventListener("click", hit);
+        let hp = 0;
+        function hit() {
+            hp++;
+            if (hp === 20) {
+                destruction();
+                return;
+            }
+            else if(hp>20){
+                return;
+            }
+            document.getElementById("tataku").play();
+            const idou = Math.floor((Math.random() * 120) - 60);
+            picture.style.top = idou + "px";
+            picture.style.left = idou + "px";
+            setTimeout(reset, 100);
+        }
+        function reset() {
+            picture.style.top = "0px";
+            picture.style.left = "0px";
+        }
+        function destruction() {
+            document.getElementById("bakuha").play();
+            picture.src = "bomb.jpg";
+            setTimeout(after,2000);
+        }
+        function after(){
+            picture.src = "img2.png";
+        }
+    </script>
+</body>
+
+</html>
